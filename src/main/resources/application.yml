@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: ravenFilms
+
+ravenApi:
+  key: 66d3f639b44602398b17e08b3c3e13d3
+  url: https://api.themoviedb.org/3/trending/movie/day
