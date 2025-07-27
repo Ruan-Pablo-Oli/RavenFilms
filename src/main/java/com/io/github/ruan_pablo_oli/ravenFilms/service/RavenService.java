@@ -17,10 +17,7 @@ public class RavenService {
     private final WebClient webClient = WebClient.create();
 
     public String consumirTMDB(){
-        System.out.println(apiKey);
-        System.out.println(apiUrl);
-
-        String urlComToken = apiUrl + "?api_key=" + apiKey;
+        String urlComToken = apiUrl + "?api_key=" + apiKey + "&page=1";
         return webClient.get()
                 .uri(urlComToken)
                 .retrieve()
