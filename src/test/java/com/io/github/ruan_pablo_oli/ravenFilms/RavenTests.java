@@ -32,6 +32,7 @@ public class RavenTests {
         }else{
             String body = result.getResponseBody().toString();
             System.out.println("Conexão feita!");
+            System.out.println(result.getResponseBody());
         }
 
     }
