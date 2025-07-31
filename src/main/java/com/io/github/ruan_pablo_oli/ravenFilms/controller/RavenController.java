@@ -4,14 +4,14 @@ package com.io.github.ruan_pablo_oli.ravenFilms.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.io.github.ruan_pablo_oli.ravenFilms.controller.DTO.FilmDTO;
 import com.io.github.ruan_pablo_oli.ravenFilms.service.RavenService;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("ravenFilms")
 public class RavenController {
 
@@ -22,11 +22,12 @@ public class RavenController {
     }
 
 
-    @GetMapping
-    public ResponseEntity<?> buscarFilmes() throws JsonProcessingException {
+    @GetMapping("/films")
+    public String buscarFilmes(Model model) throws JsonProcessingException {
 
         List<FilmDTO> films = ravenService.consumirTMDB();
-        return ResponseEntity.ok().body(films);
+        model.addAttribute("films",films);
+        return "films";
 
     }
 
