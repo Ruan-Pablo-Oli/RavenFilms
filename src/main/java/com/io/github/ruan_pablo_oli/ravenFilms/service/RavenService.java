@@ -3,6 +3,7 @@ package com.io.github.ruan_pablo_oli.ravenFilms.service;
 
 import com.io.github.ruan_pablo_oli.ravenFilms.controller.DTO.FilmDTO;
 import com.io.github.ruan_pablo_oli.ravenFilms.model.TMDBResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Service
 public class RavenService {
+
+    @Autowired
+    private FilmService filmService;
 
     @Value("${ravenApi.key}")
     private String apiKey;
