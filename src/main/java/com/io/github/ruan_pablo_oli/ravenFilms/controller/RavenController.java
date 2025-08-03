@@ -9,12 +9,11 @@ import com.io.github.ruan_pablo_oli.ravenFilms.service.RavenService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -68,6 +67,24 @@ public class RavenController {
         List<Film> films = filmsSemFiltro.stream().filter(film -> film.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
         model.addAttribute("films",films);
         return "films";
+    }
+
+    @GetMapping("/favoritos")
+    public String buscarFilmesFavoritos(Model model){
+        List<Film> films = filmService.getFilmsFavoritos();
+
+        model.addAttribute("films",films);
+        return "films";
+    }
+
+    @PostMapping("/favorito/{id}")
+    public ResponseEntity<?> salvarFilmeFavorito(@PathVariable String id){
+        if(filmService.getFilmsEmMemoria().isEmpty()){
+            List<FilmDTO> filmDTOS = ravenService.consumirTMDB();
+            filmService.salvarFilmesEmMemoria(filmDTOS);
+        }
+        filmService.salvarFilmesFavoritos(UUID.fromString(id));
+        return ResponseEntity.accepted().body(Map.of(id,"Filme salvo!"));
     }
 
 
