@@ -87,6 +87,12 @@ public class RavenController {
         return ResponseEntity.accepted().body(Map.of(id,"Filme salvo!"));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarFilmes(@PathVariable String id){
+        filmService.deletarFilme(UUID.fromString(id));
+        return ResponseEntity.accepted().build();
+    }
+
 
 
 }

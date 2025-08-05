@@ -49,4 +49,6 @@ public class FilmService {
     }
 
 
+    public void deletarFilme(UUID uuid) {
+    }
 }
